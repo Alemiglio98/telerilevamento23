@@ -98,9 +98,7 @@ plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
 #Multiframe with natural and false colours
 
 par(mfrow=c(2,1))
-
 plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
-
 plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
 
  
@@ -121,4 +119,20 @@ par(mfrow=c(2,1))
 
 plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
 
+plotRGB(l2011, r=4, g=3, b=2, stretch="Hist")
+
+#exercise: import the 1988 image
+brick("p224r63_1988_masked.grd")
+l1988<-brick("p224r63_1988_masked.grd")
+
+
+# exercise:plot in RGB (natural color)
+plotRGB(r=2, g=3, B=4, stretch"Lin")
+
+
+#exercise mulpiplot
+par(mfrow=c(2,2))
+plotRGB(l1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(l1988, r=4, g=3, b=2, stretch="Hist")
 plotRGB(l2011, r=4, g=3, b=2, stretch="Hist")
