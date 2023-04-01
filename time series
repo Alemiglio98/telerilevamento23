@@ -1,0 +1,47 @@
+# R code for importing and analysing several images
+
+library(raster)
+setwd('C:/lab/greenland')
+
+#exercise import all data
+
+lst_2000 <- raster("lst_2000.tif")
+lst_2005 <- raster("lst_2005.tif")
+lst_2010 <- raster("lst_2010.tif")
+lst_2015 <- raster("lst_2015.tif")
+
+
+ls()  #lista oggetti
+lapply()
+
+# list f files:
+rlist <- list.files(pattern="lst")
+rlist
+
+import <- lapply(rlist,raster)
+import
+
+ #exercise usare funzione stac() 
+ TGr<-stack(import)
+ plot(import)
+ 
+ plotRGB(TGr, 1, 2, 3, stretch="Lin")
+plotRGB(TGr, 2, 3, 4, stretch="Lin")
+plotRGB(TGr, 4, 3, 2, stretch="Lin")
+
+ #differences
+ 
+ dift = TGr[[2]] - TGr[[1]]
+ plot(dift)
+ 
+ cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
+plot(TGr, col=cl)
+
+
+#EN 
+
+setwd("C:/lab/en")
+en01 <- raster("EN_0001.png")
+rlist <- list.files(pattern="EN")
+
+ 
