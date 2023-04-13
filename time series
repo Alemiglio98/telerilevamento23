@@ -21,7 +21,7 @@ rlist
 import <- lapply(rlist,raster)
 import
 
- #exercise usare funzione stac() 
+ #exercise usare funzione stack() 
  TGr<-stack(import)
  plot(import)
  
@@ -34,6 +34,11 @@ plotRGB(TGr, 4, 3, 2, stretch="Lin")
  dift = TGr[[2]] - TGr[[1]]
  plot(dift)
  
+ par(mfrow=c(1,2))
+ plot(EN01, col=cl)
+ plot(EN[1])
+ 
+ 
  cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
 plot(TGr, col=cl)
 
@@ -43,5 +48,46 @@ plot(TGr, col=cl)
 setwd("C:/lab/en")
 en01 <- raster("EN_0001.png")
 rlist <- list.files(pattern="EN")
+ 
+ #Time series Analysis NO2
 
  
+cl <- colorRampPalette(c('red','orange','yellow'))(100)
+plot(en01, col=cl)
+ls()  #lista oggetti
+lapply()
+
+# list f files:
+rlist <- list.files(pattern="EN")
+rlist
+
+import <- lapply(rlist,raster)
+import
+
+ #exercise usare funzione stac() 
+ TGr<-stack(import)
+ plot(import)
+ 
+ 
+ 
+ 
+ par(mfrow=c(1,2))
+ plot(en01, col=cl)
+ plot(EN[[1]], col=cl)
+ 
+ 
+ 
+ 
+ #first and last data
+#first and last data
+par(mfrow=c(1,2))
+plot(EN[[1]], col=cl)
+plot(EN[[13]], col=cl)
+
+difen<- EN[[1]] - EN[[13]]
+cldif <- colorRampPalette(c('blue','white','red'))(100) #
+plot(difen, col=cldif)
+
+# plotRGB of three files together
+plotRGB(EN, r=1, g=7, b=13, stretch="lin")
+plotRGB(EN, r=1, g=7, b=13, stretch="hist")
