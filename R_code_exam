@@ -39,25 +39,19 @@ import
 
 
 Baltstk <- stack(import)
-TGr
+
 plot(Baltstk)
 
-plotRGB(TGr, 1, 2, 3, stretch="Lin")
-plotRGB(TGr, 2, 3, 4, stretch="Lin")
-plotRGB(TGr, 4, 3, 2, stretch="Lin")
+plotRGB(Baltstk, 1, 2, 3, stretch="Lin")
+plotRGB(Baltstk, 2, 3, 4, stretch="Lin")
+plotRGB(Baltstk, 4, 3, 2, stretch="Lin")
 
-# levelplot(TGr)
+# levelplot(Baltstck)
 cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
-plot(TGr, col=cl)
+plot(Baltstk, col=cl)
 
-# levelplot(TGr,col.regions=cl, names.attr=c("July 2000","July 2005", "July 2010", "July 2015"))
-#
-# levelplot(TGr,col.regions=cl, main="LST variation in time",
-#           names.attr=c("July 2000","July 2005", "July 2010", "July 2015"))
-#
 
-##########################
-#### Example 2: NO2 decrease during the lockdown period
-##########################
+levelplot(Baltstk,col.regions=cl, main="Ice loss",
+           names.attr=c("2013","2016", "2020", "2022"))
+#correct code until here
 
-library(raster)
