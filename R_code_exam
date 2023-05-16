@@ -55,3 +55,117 @@ levelplot(Baltstk,col.regions=cl, main="Ice loss",
            names.attr=c("2013","2016", "2020", "2022"))
 #correct code until here
 
+#------
+
+
+# Classification of remote sensing data
+
+ 
+
+library(raster)
+setwd("C:/lab/")
+Bt13 <- brick("C:/lab/baltoro/Landsat_baltoro_2013.tif")
+
+plotRGB(Bt13 , 1, 2, 3, stretch="lin")
+
+plotRGB(Bt13 , 1, 2, 3, stretch="hist")
+
+ 
+
+# Classifying the solar data
+
+ 
+
+# 1. Get all the single values
+
+singlenr <- getValues(Bt13)
+singlenr
+
+ 
+
+# 2. Classify
+
+kcluster <- kmeans(singlenr, centers = 3)
+kcluster
+
+
+# 3. Set values to a raster on the basis of Bt13
+
+Bt13class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
+
+ 
+
+cl <- colorRampPalette(c('yellow','black','red'))(100)
+
+plot(Bt13class, col=cl)
+
+ 
+
+#class 1: Shadows
+#class 2: Defrosted land
+#class 3: Ice/snow
+
+ 
+
+frequencies <- freq(Bt13class)
+frequencies
+
+tot = 2088083
+
+percentages = frequencies * 100 /  tot
+
+ 
+
+#class 3: 29.8%
+#class 2: 27.65%
+#class 1: 42.55%
+
+#Let's classify the 2022 image
+
+
+Bt22 <- brick("C:/lab/baltoro/Landsat_baltoro_2022.tif")
+
+plotRGB(Bt22 , 1, 2, 3, stretch="lin")
+
+
+# 1. Get all the single values
+
+singlenr22 <- getValues(Bt22)
+singlenr22
+
+ 
+
+# 2. Classify
+
+kcluster <- kmeans(singlenr, centers = 3)
+kcluster
+
+
+# 3. Set values to a raster on the basis of Bt22
+
+Bt22class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
+
+ 
+
+cl <- colorRampPalette(c('yellow','black','red'))(100)
+plot(Bt22class, col=cl)
+
+
+#class 1: Ice
+#class 2: Defrosted land
+#class 3: Shadows
+
+ 
+frequencies22 <- freq(Bt22class)
+frequencies22
+
+tot = 2088083
+
+percentages = frequencies * 100 /  tot
+
+#class 3: 29.8%
+#class 1: 42.55
+#class 2: 27.65%
+
+
+#-----
