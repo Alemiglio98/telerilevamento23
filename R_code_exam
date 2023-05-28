@@ -64,13 +64,9 @@ setwd("C:/lab/")
 Bt13 <- brick("C:/lab/baltoro/Landsat_baltoro_2013.tif")
 
 plotRGB(Bt13 , 1, 2, 3, stretch="lin")
-
 plotRGB(Bt13 , 1, 2, 3, stretch="hist")
 
  
-
-# Classifying the solar data
-
  
 
 # 1. Get all the single values
@@ -96,7 +92,6 @@ cl <- colorRampPalette(c('yellow','black','red'))(100)
 
 plot(Bt13class, col=cl)
 
- 
 
 #class 1: Shadows
 #class 2: Defrosted land
