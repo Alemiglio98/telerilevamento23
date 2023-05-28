@@ -169,3 +169,22 @@ percentages = frequencies * 100 /  tot
 
 
 #-----
+
+library(raster)
+
+setwd("C:/lab/") # Windows
+
+bt13_b6 <-"C:/lab/baltoro/Baltoro_2013_B6.tif"
+# Exercise: import the first file -> defor1_.jpg -> give it the name l1992
+bt13 <- brick("C:/lab/baltoro/Landsat_baltoro_2013.tif")
+
+plotRGB(bt13, r=1, g=2, b=3, stretch="lin")
+
+# band1 = NIR
+# band2 = red
+# band3 = green
+
+
+stack(bt13, bt13_b6)
+btstk<-stack(bt13, bt13_b6)
+ndsi = (btstk[[3]] - btstk[[5]]) / (btstk[[3]] + btstk[[5]])
