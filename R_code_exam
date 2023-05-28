@@ -186,6 +186,14 @@ stack(bt13, bt13_b6)
 btstk13<-stack(bt13, bt13_b6)
 ndsi13 = (btstk13[[2]] - btstk13[[5]]) / (btstk13[[2]] + btstk13[[5]])
 
+ndsi13_df <- as.data.frame(ndsi13, xy=T)
+
+ggplot() +
+geom_raster(ndsi13_df, mapping =aes(x=x, y=y, fill=layer)) +
+scale_fill_viridis(option = "viridis") +
+ggtitle("NDSI 2013")
+
+
 #2022
 bt22_b6 <-"C:/lab/baltoro/bt22_b6.tif"
 bt22 <- brick("C:/lab/baltoro/Landsat_baltoro_2022.tif")
