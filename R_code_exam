@@ -2,12 +2,13 @@
 # Baltoro glacier variation
 
 install.packages("raster")
-install.packages("rasterVis")
+install.packages("viridis")
+install.packages("ggplot2")
+
+
+
 library(raster)
-library(rasterVis)
-
-
- setwd("C:/lab/baltoro")
+setwd("C:/lab/baltoro")
 
 
 lb_2013 <- raster("Landsat_baltoro_2013.tif")
@@ -33,8 +34,6 @@ import
 
 #correct code until here
 
-
-
 Baltstk <- stack(import)
 
 plot(Baltstk)
@@ -53,8 +52,6 @@ levelplot(Baltstk,col.regions=cl, main="Ice loss",
 #correct code until here
 
 #------
-
-
 # Classification of remote sensing data
 
  
