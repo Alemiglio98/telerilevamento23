@@ -1,22 +1,23 @@
-# Time series analysis
 # Baltoro glacier variation
+# Time series analysis
 
+
+#packages I will need
 install.packages("raster")
 install.packages("viridis")
 install.packages("ggplot2")
 
 
-
 library(raster)
 setwd("C:/lab/baltoro")
 
-
+#get each image and assigne it to name
 lb_2013 <- raster("Landsat_baltoro_2013.tif")
 lb_2016 <- raster("Landsat_baltoro_2016.tif")
 lb_2020 <- raster("Landsat_baltoro_2020.tif")
 lb_2022 <- raster("Landsat_baltoro_2022.tif")
 
-# par
+#multiplot
 par(mfrow=c(2,2))
 plot(lb_2013)
 plot(lb_2016)
@@ -25,15 +26,18 @@ plot(lb_2022)
 
 
 # list f files:
-#esempio:Landsat_baltoro_2013
+#exemple:Landsat_baltoro_2013
 rlist <- list.files(pattern="baltoro")
 rlist
 
+
+#Apply a Function over a List or Vector (for x argument)
 import <- lapply(rlist,raster)
 import
 
-#correct code until here
+#correct code until here(comment to be deleted)
 
+#stack generation 
 Baltstk <- stack(import)
 
 plot(Baltstk)
@@ -67,20 +71,15 @@ plotRGB(Bt13 , 1, 2, 3, stretch="hist")
  
 
 # 1. Get all the single values
-
 singlenr <- getValues(Bt13)
 singlenr
 
- 
-
 # 2. Classify
-
 kcluster <- kmeans(singlenr, centers = 3)
 kcluster
 
 
 # 3. Set values to a raster on the basis of Bt13
-
 Bt13class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
 
  
@@ -94,8 +93,7 @@ plot(Bt13class, col=cl)
 #class 2: Defrosted land
 #class 3: Ice/snow
 
- 
-
+#get absolute frequencies
 frequencies <- freq(Bt13class)
 frequencies
 
@@ -110,23 +108,19 @@ percentages = frequencies * 100 /  tot
 #class 1: 42.55%
 
 #Let's classify the 2022 image
-
 Bt22 <- brick("C:/lab/baltoro/Landsat_baltoro_2022.tif")
 plotRGB(Bt22 , 1, 2, 3, stretch="lin")
 
 
 # 1. Get all the single values
-
 singlenr22 <- getValues(Bt22)
 singlenr22
 
 # 2. Classify
-
 kcluster <- kmeans(singlenr, centers = 3)
 kcluster
 
 # 3. Set values to a raster on the basis of Bt22
-
 Bt22class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
 
  
@@ -153,17 +147,17 @@ percentages = frequencies * 100 /  tot
 
 
 #-----
-
+#normalized difference snow index
 
 # let's calculate NDSI
 library(raster)
 library(ggplot2)
 library(viridis)
 
-setwd("C:/lab/") # Windows
+setwd("C:/lab/") 
 
 
-# adding band 6 to my raster
+#adding band 6 to my raster (do it carefully it's easy to make a mistake!!!!)
 
 #2013
 bt13_b6 <-"C:/lab/baltoro/Baltoro_2013_B6.tif"
@@ -172,12 +166,12 @@ bt13 <- brick("C:/lab/baltoro/Landsat_baltoro_2013.tif")
 plotRGB(bt13, r=1, g=2, b=3, stretch="lin")
 
 # band2 = green
-
-
 stack(bt13, bt13_b6)
 btstk13<-stack(bt13, bt13_b6)
 ndsi13 = (btstk13[[2]] - btstk13[[5]]) / (btstk13[[2]] + btstk13[[5]])
 
+
+#make a dataframe in order to use ggplot
 ndsi13_df <- as.data.frame(ndsi13, xy=T)
 
 ggplot() +
