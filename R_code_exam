@@ -67,25 +67,15 @@ Bt13 <- brick("C:/lab/baltoro/Landsat_baltoro_2013.tif")
 plotRGB(Bt13 , 1, 2, 3, stretch="lin")
 plotRGB(Bt13 , 1, 2, 3, stretch="hist")
 
- 
- 
-
 # 1. Get all the single values
 singlenr <- getValues(Bt13)
 singlenr
-
 # 2. Classify
 kcluster <- kmeans(singlenr, centers = 3)
 kcluster
-
-
 # 3. Set values to a raster on the basis of Bt13
 Bt13class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
-
- 
-
 cl <- colorRampPalette(c('yellow','black','red'))(100)
-
 plot(Bt13class, col=cl)
 
 
@@ -111,20 +101,14 @@ percentages = frequencies * 100 /  tot
 Bt22 <- brick("C:/lab/baltoro/Landsat_baltoro_2022.tif")
 plotRGB(Bt22 , 1, 2, 3, stretch="lin")
 
-
 # 1. Get all the single values
 singlenr22 <- getValues(Bt22)
 singlenr22
-
 # 2. Classify
 kcluster <- kmeans(singlenr, centers = 3)
 kcluster
-
 # 3. Set values to a raster on the basis of Bt22
 Bt22class <- setValues(Bt13[[1]], kcluster$cluster) # assign new values to a raster object
-
- 
-
 cl <- colorRampPalette(c('yellow','black','red'))(100)
 plot(Bt22class, col=cl)
 
